@@ -5,16 +5,9 @@ const Campground = require("../models/campground");
 const { campgroundSchema } = require("../schemas.js");
 const review = require("../models/review");
 const { default: mongoose } = require("mongoose");
+const { isLoggedIn, validateCampground } = require("../middleware");
 
 const router = express.Router();
-
-const validateCampground = (req, res, next) => {
-  const { error } = campgroundSchema.validate(req.body);
-  if (error) {
-    const message = error.details.map((el) => el.message).join(", ");
-    throw new ExpressError(message, 400);
-  } else next();
-};
 
 //Show All Campgrounds
 router.get(
@@ -26,12 +19,13 @@ router.get(
 );
 
 //Create Campground
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("campgrounds/new");
 });
 
 router.post(
   "/",
+  isLoggedIn,
   validateCampground,
   wrapAsync(async (req, res) => {
     const campground = new Campground(req.body.campground);
@@ -59,6 +53,7 @@ router.get(
 //Edit Campground
 router.get(
   "/:id/edit",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     if (mongoose.Types.ObjectId.isValid(id)) {
@@ -73,6 +68,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateCampground,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
@@ -85,6 +81,7 @@ router.put(
 //Delete Campground
 router.delete(
   "/:id",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
