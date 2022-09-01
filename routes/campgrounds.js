@@ -1,11 +1,8 @@
 const express = require("express");
 const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
 const Campground = require("../models/campground");
-const { campgroundSchema } = require("../schemas.js");
-const review = require("../models/review");
 const { default: mongoose } = require("mongoose");
-const { isLoggedIn, validateCampground } = require("../middleware");
+const { isLoggedIn, validateCampground, isAuthor } = require("../middleware");
 
 const router = express.Router();
 
@@ -29,6 +26,7 @@ router.post(
   validateCampground,
   wrapAsync(async (req, res) => {
     const campground = new Campground(req.body.campground);
+    campground.author = req.user._id;
     await campground.save();
     req.flash("success", "Successfully created a new campground");
     res.redirect(`/campgrounds/${campground._id}`);
@@ -41,7 +39,9 @@ router.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     if (mongoose.Types.ObjectId.isValid(id)) {
-      const campground = await Campground.findById(id).populate("reviews");
+      const campground = await Campground.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("author");
       res.render("campgrounds/show", { campground });
     } else {
       req.flash("error", "Cannot find campground");
@@ -54,6 +54,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isAuthor,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     if (mongoose.Types.ObjectId.isValid(id)) {
@@ -69,6 +70,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isAuthor,
   validateCampground,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
@@ -82,6 +84,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isAuthor,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
