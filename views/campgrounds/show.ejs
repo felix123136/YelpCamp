@@ -62,7 +62,21 @@
       <div class="card-footer text-muted">2 days ago</div>
     </div>
   </div>
+  <style>
+    #marker {
+      background-image: url('<%-campground.images.length?campground.images[0].url:"https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg"%>');
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .mapboxgl-popup {
+      max-width: 200px;
+    }
+  </style>
   <div class="col-6">
+    <div id="map" style="width: 100%; height: 400px" class="mb-3"></div>
     <% if(user) {%>
     <h2>Leave a Review</h2>
     <form
@@ -147,3 +161,13 @@
     <% } %>
   </div>
 </div>
+<script>
+  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+  let coordinates = "<%- campground.geometry.coordinates %>";
+  coordinates = coordinates.split(",");
+  coordinates = [parseInt(coordinates[0]), parseInt(coordinates[1])];
+  const title = "<%-campground.title%>";
+  const loc = "<%-campground.location%>";
+</script>
+
+<script src="/scripts/showPageMap.js"></script>
