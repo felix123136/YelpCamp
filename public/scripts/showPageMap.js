@@ -1,15 +1,14 @@
 mapboxgl.accessToken = mapToken;
-
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/streets-v11",
-  center: coordinates,
+  center: campground.geometry.coordinates,
   zoom: 12,
   projection: "globe",
 });
 
 const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-  `<strong>${title}</strong><p>${loc}</p>`
+  `<strong>${campground.title}</strong><p>${campground.location}</p>`
 );
 
 // create DOM element for the marker
@@ -18,6 +17,6 @@ el.id = "marker";
 
 // create the marker
 new mapboxgl.Marker(el)
-  .setLngLat(coordinates)
+  .setLngLat(campground.geometry.coordinates)
   .setPopup(popup) // sets a popup on this marker
   .addTo(map);
