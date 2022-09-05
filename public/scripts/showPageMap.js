@@ -20,3 +20,6 @@ new mapboxgl.Marker(el)
   .setLngLat(campground.geometry.coordinates)
   .setPopup(popup) // sets a popup on this marker
   .addTo(map);
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
