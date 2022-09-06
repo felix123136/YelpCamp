@@ -9,7 +9,7 @@ body {
 }
 
 .cover-container {
-  max-width: 60vw;
+  max-width: 70vw;
 }
 
 .nav-link {
@@ -26,7 +26,7 @@ body {
 }
 
 .nav-link.active {
-  color: white;
+  color: white !important;
   border-bottom-color: white;
 }
 
@@ -38,4 +38,58 @@ body {
 .btn-secondary:hover {
   background-color: #333333 !important;
   color: white !important;
+}
+
+.small {
+  display: none;
+}
+
+.lead {
+  font-size: 16px;
+}
+
+.navbar-toggler {
+  border: 2px solid whitesmoke;
+}
+
+@media (max-width: 768px) {
+  .lead {
+    font-size: 14px;
+  }
+
+  .cover-container {
+    max-width: 95vw;
+  }
+
+  .nav-link {
+    border-bottom: none;
+    text-align: left;
+  }
+
+  .nav-link:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  .nav-link.active {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 432px) {
+  .lead {
+    display: none;
+  }
+
+  .home-btn {
+    font-size: 12px;
+  }
+
+  .small {
+    display: block;
+  }
+
+  footer {
+    font-size: 10px;
+  }
 }
