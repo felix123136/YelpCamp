@@ -109,14 +109,18 @@
               <% }) %>
             </div>
             <div class="mb-3">
-              <button class="btn btn-info text-white" type="submit">
+              <a
+                class="btn btn-danger btn-sm text-white"
+                href="/campgrounds/<%= campground._id %>"
+                >Discard Changes</a
+              >
+              <button class="btn btn-info btn-sm text-white" type="submit">
                 Update Campground
               </button>
             </div>
           </form>
         </div>
       </div>
-      <a href="/campgrounds/<%= campground._id %>">Back</a>
     </div>
   </div>
 </main>
