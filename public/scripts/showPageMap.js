@@ -11,12 +11,8 @@ const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
   `<strong>${campground.title}</strong><p>${campground.location}</p>`
 );
 
-// create DOM element for the marker
-const el = document.createElement("div");
-el.id = "marker";
-
 // create the marker
-new mapboxgl.Marker(el)
+new mapboxgl.Marker()
   .setLngLat(campground.geometry.coordinates)
   .setPopup(popup) // sets a popup on this marker
   .addTo(map);

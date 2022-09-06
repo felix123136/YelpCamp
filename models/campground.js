@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { cloudinary } = require("../cloudinary");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const { Schema, model } = mongoose;
 const Review = require("./review");
@@ -57,5 +58,7 @@ campgroundSchema.post("findOneAndDelete", async (campground) => {
     }
   }
 });
+
+campgroundSchema.plugin(mongoosePaginate);
 
 module.exports = model("Campground", campgroundSchema);

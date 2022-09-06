@@ -3,12 +3,17 @@
   <%- include('../partials/flash') %>
   <link rel="stylesheet" href="/stylesheets/stars.css" />
   <div class="row">
-    <div class="col-6">
+    <div class="col-xl-6 offset-xl-0 col-md-8 offset-md-2">
       <div id="campgroundCarousel" class="carousel slide" data-bs-ride="true">
         <div class="carousel-inner">
           <% campground.images.forEach((img, idx) => { %>
           <div class="carousel-item <%= idx === 0 && 'active' %>">
-            <img src="<%= img.url %>" class="d-block w-100" alt="" />
+            <img
+              src="<%= img.url %>"
+              class="d-block w-100 show-img"
+              alt=""
+              crossorigin
+            />
           </div>
           <% }) %>
         </div>
@@ -64,20 +69,7 @@
         <div class="card-footer text-muted">2 days ago</div>
       </div>
     </div>
-    <style>
-      #marker {
-        background-image: url('<%-campground.images.length?campground.images[0].url:"https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg"%>');
-        background-size: cover;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-      .mapboxgl-popup {
-        max-width: 200px;
-      }
-    </style>
-    <div class="col-6">
+    <div class="col-xl-6 offset-xl-0 col-md-8 offset-md-2">
       <div id="map" class="mb-3"></div>
       <% if(user) {%>
       <h2>Leave a Review</h2>
