@@ -4,8 +4,11 @@ const Review = require("../models/review");
 const cities = require("./cities");
 const { descriptors, places } = require("./seedHelpers");
 
+const dbUrl =
+  "mongodb+srv://7427466391:WVYjtTMv2kW74cX@cluster0.5nq95vi.mongodb.net/?retryWrites=true&w=majority";
+
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/yelpcamp");
+  await mongoose.connect(dbUrl);
   console.log("Database Connected");
 }
 
@@ -41,7 +44,7 @@ const seedDB = async () => {
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque blanditiis iste quaerat dolores omnis, eos quo, nostrum reprehenderit quis quas beatae adipisci assumenda eius eveniet maiores asperiores, suscipit labore fuga.",
       price,
-      author: "630f5f9d7bc5621beb583731",
+      author: "6316f4a741f5f89a73918f8a",
     });
     await camp.save();
   }

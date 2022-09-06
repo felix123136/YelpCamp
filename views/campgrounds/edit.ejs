@@ -91,7 +91,12 @@
             <div class="mb-3">
               <h5>Delete Images</h5>
               <% campground.images.forEach((img, idx) => { %>
-              <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="" />
+              <img
+                src="<%= img.thumbnail %>"
+                class="img-thumbnail"
+                alt=""
+                crossorigin
+              />
               <div class="form-check-inline">
                 <input
                   class="form-check-input mt-0"
