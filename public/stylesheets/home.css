@@ -73,6 +73,7 @@ body {
 
   .nav-link.active {
     border-bottom: none;
+    text-decoration: underline;
   }
 }
 
