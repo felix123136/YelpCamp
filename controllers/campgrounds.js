@@ -11,7 +11,7 @@ module.exports.index = async (req, res) => {
     {},
     {
       page: req.query.page || 1,
-      limit: 15,
+      limit: 21,
       sort: "-_id",
     }
   );

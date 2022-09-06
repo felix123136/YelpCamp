@@ -31,12 +31,12 @@ map.on("load", () => {
         "step",
         ["get", "point_count"],
         "#51bbd6",
-        25,
+        3,
         "#f1f075",
-        50,
+        5,
         "#f28cb1",
       ],
-      "circle-radius": ["step", ["get", "point_count"], 20, 25, 25, 50, 30],
+      "circle-radius": ["step", ["get", "point_count"], 20, 3, 25, 5, 30],
     },
   });
 
